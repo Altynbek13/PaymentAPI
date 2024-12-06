@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PaymentAPI.Database;
+using PaymentAPI.Interfaces;
+using PaymentAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,7 @@ var connectionString = builder.Configuration.GetConnectionString("Local");
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IPaymentService,PaymentService>();
 builder.Services.AddDbContext<PaymentDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
